@@ -41,6 +41,21 @@ public interface Player extends Runnable {
     String getResponse(long timeOut);
 
     /**
+     * Adds string to the end of the dump output for the player. Does not add
+     * new line char (see {@link #addLineToDump(java.lang.String) }
+     *
+     * @param string the string to append to the dump
+     */
+    void addToDump(String string);
+
+    /**
+     * Adds line to the end of the dump output for the player.
+     *
+     * @param string the line to append to the dump
+     */
+    void addLineToDump(String string);
+
+    /**
      * Ends the bot process and it's communication
      *
      */
