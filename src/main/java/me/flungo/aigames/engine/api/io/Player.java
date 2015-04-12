@@ -24,10 +24,13 @@ import java.io.IOException;
 public interface Player extends Runnable {
 
     /**
-     * Ends the bot process and it's communication
+     * Processes a line by reading it or writing it
      *
+     * @param line the line to process
+     * @param type the type of the line "input", "output" or "error"
+     * @throws IOException exception communicating with bot
      */
-    void finish();
+    void process(String line, String type) throws IOException;
 
     /**
      * Waits for a response from the bot
@@ -38,12 +41,9 @@ public interface Player extends Runnable {
     String getResponse(long timeOut);
 
     /**
-     * Processes a line by reading it or writing it
+     * Ends the bot process and it's communication
      *
-     * @param line the line to process
-     * @param type the type of the line "input", "output" or "error"
-     * @throws IOException exception communicating with bot
      */
-    void process(String line, String type) throws IOException;
+    void finish();
 
 }
