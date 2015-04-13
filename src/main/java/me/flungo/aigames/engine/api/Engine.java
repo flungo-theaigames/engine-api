@@ -46,9 +46,15 @@ public interface Engine {
      * State should be ready before running.
      *
      * @throws IllegalStateException thrown if engine is not in the
-     * {@link EngineState#READY} state before being called.
-     * @throws Exception
+     * {@link EngineState#READY} state before being called. The existing state
+     * of the {@link Engine} will not be modified and no changes will be made
+     * within any of the components. The method can be run again, once the
+     * {@link Engine} has entered the {@link EngineState#READY} state.
+     * @throws EngineRuntimeException thrown when an exception has occurred
+     * during the runtime loop of the {@link Engine}. The {@link EngineState}
+     * will become {@link EngineState#FAILED} after the loop has ended with this
+     * exception.
      */
-    void start() throws IllegalStateException, Exception;
+    void start() throws IllegalStateException, EngineRuntimeException;
 
 }
