@@ -20,35 +20,30 @@ package me.flungo.aigames.engine.api;
  *
  * @author Fabrizio Lungo <fab@lungo.co.uk>
  */
-public interface Engine {
+public enum EngineState {
 
     /**
-     * Sets the game logic.
-     *
-     * @param logic the {@link Logic} to use for the game.
+     * {@link Engine} has been instantiated but no {@link Logic} has been given
+     * for the {@link Engine}.
      */
-    void setLogic(Logic logic);
-
+    INSTANTIATED,
     /**
-     * Determines whether game has ended.
-     *
-     * @return true if the game has ended, false otherwise.
+     * {@link Engine} has a valid {@link Logic} but has not been started.
      */
-    boolean hasEnded();
-
+    READY,
     /**
-     * @return the current {@link EngineState} of the {@link Engine}.
+     * {@link Engine} has been started but the game has not ended.
      */
-    EngineState getState();
-
+    RUNNING,
     /**
-     * Method to start engine. Runs the game loop, until the game has ended.
-     * State should be ready before running.
-     *
-     * @throws IllegalStateException thrown if engine is not in the
-     * {@link EngineState#READY} state before being called.
-     * @throws Exception
+     * {@link Engine} has ended successfully with the {@link Logic} declaring
+     * that the game is over.
      */
-    void start() throws IllegalStateException, Exception;
-
+    STOPPED,
+    /**
+     * {@link Engine} has ended unsuccessfully with the {@link Logic} stating
+     * the game has not ended. This usually occurs after an exception has been
+     * thrown in the engine runtime loop.
+     */
+    FAILED
 }
